@@ -1,0 +1,107 @@
+[
+  {
+    "sku": "LIC-M365-E3",
+    "nombre": "Licencia Microsoft 365 E3 (anual)",
+    "categoria": "licencias",
+    "stock": 120,
+    "precio_clp": 396000
+  },
+  {
+    "sku": "LIC-GWS-BUS",
+    "nombre": "Licencia Google Workspace Business (anual)",
+    "categoria": "licencias",
+    "stock": 85,
+    "precio_clp": 158000
+  },
+  {
+    "sku": "LIC-JIRA-50",
+    "nombre": "Licencia Jira Software Cloud 50 usuarios (anual)",
+    "categoria": "licencias",
+    "stock": 14,
+    "precio_clp": 4200000
+  },
+  {
+    "sku": "LIC-FIGMA-ORG",
+    "nombre": "Licencia Figma Organization por asiento (anual)",
+    "categoria": "licencias",
+    "stock": 40,
+    "precio_clp": 540000
+  },
+  {
+    "sku": "HW-MBP-14",
+    "nombre": "Laptop MacBook Pro 14\" M4 Pro 24GB",
+    "categoria": "hardware",
+    "stock": 8,
+    "precio_clp": 2650000
+  },
+  {
+    "sku": "HW-DELL-5540",
+    "nombre": "Laptop Dell Precision 5540 32GB",
+    "categoria": "hardware",
+    "stock": 15,
+    "precio_clp": 1890000
+  },
+  {
+    "sku": "HW-LENOVO-T14",
+    "nombre": "Laptop Lenovo ThinkPad T14 Gen 5",
+    "categoria": "hardware",
+    "stock": 22,
+    "precio_clp": 1150000
+  },
+  {
+    "sku": "HW-MON-27",
+    "nombre": "Monitor LG UltraFine 27\" 4K",
+    "categoria": "hardware",
+    "stock": 30,
+    "precio_clp": 420000
+  },
+  {
+    "sku": "SRV-CELL-FS",
+    "nombre": "Hora célula de desarrollo full-stack",
+    "categoria": "servicios",
+    "stock": 640,
+    "precio_clp": 48000
+  },
+  {
+    "sku": "SRV-CELL-DATA",
+    "nombre": "Hora célula de datos e IA",
+    "categoria": "servicios",
+    "stock": 320,
+    "precio_clp": 62000
+  },
+  {
+    "sku": "SRV-CELL-QA",
+    "nombre": "Hora célula de QA automation",
+    "categoria": "servicios",
+    "stock": 480,
+    "precio_clp": 39000
+  },
+  {
+    "sku": "SRV-UX-SPRINT",
+    "nombre": "Sprint de descubrimiento UX (2 semanas)",
+    "categoria": "servicios",
+    "stock": 6,
+    "precio_clp": 5800000
+  },
+  {
+    "sku": "SRV-ARQ-CLOUD",
+    "nombre": "Hora arquitecto cloud senior",
+    "categoria": "servicios",
+    "stock": 160,
+    "precio_clp": 85000
+  },
+  {
+    "sku": "CAP-WS-IA",
+    "nombre": "Workshop de IA generativa para equipos (8 horas)",
+    "categoria": "capacitacion",
+    "stock": 4,
+    "precio_clp": 2400000
+  },
+  {
+    "sku": "CAP-CERT-CLOUD",
+    "nombre": "Voucher certificación cloud (AWS/GCP/Azure)",
+    "categoria": "capacitacion",
+    "stock": 25,
+    "precio_clp": 145000
+  }
+]
