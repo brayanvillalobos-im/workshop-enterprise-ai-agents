@@ -1,5 +1,8 @@
 # Checkpoint 02 — El loop agéntico
 
+> 📚 Material opcional para quienes programan — no es necesario para seguir
+> el taller (la ruta principal está en [GUIA-EXPRESS.md](../../GUIA-EXPRESS.md)).
+
 ## Objetivo
 Cerrar el ciclo que quedó abierto en el checkpoint 01: ejecutar la herramienta
 que Claude pide, devolverle el resultado y dejarlo continuar hasta la

@@ -2,12 +2,17 @@
 
 ### Arquitectura y Despliegue de Agentes de IA en la Nube Corporativa
 
-Workshop interno de **Imagemaker** · 2 sesiones · Facilitador: **Brayan Villalobos**, Technical Manager
+Workshop interno de **Imagemaker** · 2 sesiones de 75 min · Facilitador: **Brayan Villalobos**, Technical Manager
 
-Construiremos desde cero un agente de IA — el **"Asistente de Operaciones"** —
-con el SDK de Python de Anthropic, y lo desplegaremos como contenedor
-serverless en la nube. Sin frameworks mágicos: el objetivo es entender **el
-patrón agéntico** que está debajo de todos ellos.
+Pondremos en marcha un agente de IA — el **"Asistente de Operaciones"** —
+construido con el SDK de Python de Anthropic, lo personalizaremos y lo
+desplegaremos como contenedor serverless en la nube.
+
+> 🚀 **No necesitas saber programar.** El taller consiste en **ejecutar y
+> personalizar**, no en escribir código. Tu ruta es la
+> **[⚡ GUIA-EXPRESS.md](GUIA-EXPRESS.md)**: comandos numerados para copiar y
+> pegar, con el resultado esperado de cada uno. Este README es la referencia
+> completa de apoyo.
 
 ---
 
@@ -15,11 +20,12 @@ patrón agéntico** que está debajo de todos ellos.
 
 1. [Prerrequisitos](#prerrequisitos)
 2. [Setup en 5 pasos](#setup-en-5-pasos)
-3. [Sesión 1 — Mapa de checkpoints](#sesión-1--mapa-de-checkpoints)
-4. [Sesión 2 — La app final](#sesión-2--la-app-final)
-5. [Guías de deploy](#guías-de-deploy)
-6. [Equivalencias multi-cloud](#equivalencias-multi-cloud)
-7. [Troubleshooting](#troubleshooting)
+3. [Sesión 1 — El agente en tu máquina](#sesión-1--el-agente-en-tu-máquina)
+4. [Personaliza tu agente (sin código)](#personaliza-tu-agente-sin-código)
+5. [Sesión 2 — Guías de deploy](#sesión-2--guías-de-deploy)
+6. [Material opcional — checkpoints para quienes programan](#material-opcional--checkpoints-para-quienes-programan)
+7. [Equivalencias multi-cloud](#equivalencias-multi-cloud)
+8. [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -28,11 +34,11 @@ patrón agéntico** que está debajo de todos ellos.
 - **Python 3.10 o superior** (`python --version` para verificar).
 - Una **API key de Anthropic** (el facilitador entrega keys del workspace del
   taller; si usas la tuya: <https://platform.claude.com/>).
-- **Docker Desktop** (solo Sesión 2, para probar la imagen en local).
-- Cuenta en al menos una nube (Google Cloud recomendada para la Sesión 2).
-- Editor de código (VS Code o similar).
+- Un **editor de texto** cualquiera (Bloc de notas sirve; VS Code es más cómodo).
+- Cuenta en Google Cloud (solo Sesión 2; el facilitador indica cómo).
+- **Docker Desktop** — opcional, solo si quieres probar la imagen en local.
 
-No se asume experiencia previa en cloud ni con el API de Anthropic.
+No se asume experiencia previa en programación, cloud ni con el API de Anthropic.
 
 ## Setup en 5 pasos
 
@@ -63,36 +69,24 @@ python checkpoints/00-hola-claude/main.py
 Si el paso 5 imprime una respuesta de Claude, estás listo. Si no, revisa
 [Troubleshooting](#troubleshooting).
 
-## Sesión 1 — Mapa de checkpoints
+## Sesión 1 — El agente en tu máquina
 
-Cada checkpoint es una carpeta autoejecutable con su propio README. La idea es
-avanzar en orden: cada uno agrega **un** concepto sobre el anterior.
-
-| Checkpoint | Concepto que enseña |
-|---|---|
-| [`00-hola-claude`](checkpoints/00-hola-claude/) | La llamada básica: `messages.create`, roles y bloques de contenido |
-| [`01-primera-tool`](checkpoints/01-primera-tool/) | Tools y JSON Schema: Claude **solicita**, no ejecuta (`stop_reason == "tool_use"`) |
-| [`02-loop-agentico`](checkpoints/02-loop-agentico/) | El loop agéntico: ejecutar → `tool_result` → repetir, con límite de iteraciones |
-| [`03-agente-completo`](checkpoints/03-agente-completo/) | System prompt + 3 herramientas: orquestación que **emerge**, nadie la programa |
-
-## Sesión 2 — La app final
-
-La carpeta [`app/`](app/) contiene el mismo agente del checkpoint 03,
-reorganizado para producción:
-
-- [`agent.py`](app/agent.py) — el loop agéntico, ahora reutilizable.
-- [`tools.py`](app/tools.py) — definiciones (JSON Schema) + implementaciones.
-- [`main.py`](app/main.py) — FastAPI: `POST /chat` (stateless), `GET /` (UI), `GET /health`.
-- [`static/index.html`](app/static/index.html) — UI de chat vanilla con badges de herramientas.
-
-**Correr en local:**
+La carpeta [`app/`](app/) contiene el agente completo, listo para ejecutar:
 
 ```bash
 uvicorn app.main:app --reload
 # abre http://127.0.0.1:8000
 ```
 
-**Probar la imagen Docker en local:**
+Qué hay adentro (para los curiosos — no hace falta tocarlo):
+
+- [`agent.py`](app/agent.py) — el **loop agéntico**: Claude decide, el servidor ejecuta, Claude continúa.
+- [`tools.py`](app/tools.py) — las 3 herramientas: inventario, cotizaciones y base de conocimiento.
+- [`main.py`](app/main.py) — FastAPI: `POST /chat` (stateless), `GET /` (UI), `GET /health`.
+- [`static/index.html`](app/static/index.html) — la UI de chat, con badges 🔧 que muestran qué herramienta usó cada respuesta.
+- [`config/system_prompt.txt`](app/config/system_prompt.txt) — la personalidad del agente, en texto plano.
+
+**Probar la imagen Docker en local (opcional):**
 
 ```bash
 docker build -t asistente-operaciones .
@@ -104,7 +98,22 @@ docker run -p 8080:8080 --env-file .env asistente-operaciones
 > Solo habla con FastAPI, y FastAPI habla con Anthropic. Ese es el motivo de
 > tener un backend aunque la UI sea estática.
 
-## Guías de deploy
+## Personaliza tu agente (sin código)
+
+Tres archivos de texto controlan al agente. Se editan con cualquier editor,
+se guardan, y el cambio se siente en el **siguiente mensaje del chat** — sin
+reiniciar nada:
+
+| Archivo | Qué controla | Ideas |
+|---|---|---|
+| [`app/config/system_prompt.txt`](app/config/system_prompt.txt) | La personalidad y las reglas del agente | Tono pirata, ultra formal, responder en inglés, recomendar siempre un producto |
+| [`app/data/inventario.json`](app/data/inventario.json) | El catálogo de productos y precios | Cambia precios, agrega tus productos (copia un bloque `{...},` y edítalo) |
+| [`app/data/conocimiento.md`](app/data/conocimiento.md) | Las políticas internas que el agente conoce | Agrega una sección `## Tu política` con 2-3 líneas |
+
+Si rompes el formato del JSON, el agente te lo dirá amablemente en el chat
+(con el número de línea aproximado) en vez de caerse.
+
+## Sesión 2 — Guías de deploy
 
 | Guía | Nube | Nivel de detalle |
 |---|---|---|
@@ -112,6 +121,20 @@ docker run -p 8080:8080 --env-file .env asistente-operaciones
 | [`deploy/02-aws-app-runner.md`](deploy/02-aws-app-runner.md) | AWS App Runner | Resumida pero completa |
 | [`deploy/03-azure-container-apps.md`](deploy/03-azure-container-apps.md) | Azure Container Apps | Resumida pero completa |
 | [`deploy/multi-cloud.md`](deploy/multi-cloud.md) | Bedrock / Vertex AI | El mismo agente con modelos gestionados en la nube del cliente |
+
+## Material opcional — checkpoints para quienes programan
+
+Si programas (o te da curiosidad cómo funciona el agente por dentro), la
+carpeta [`checkpoints/`](checkpoints/) lo reconstruye en 4 pasos. Cada carpeta
+es autoejecutable (`python main.py`) y tiene su propio README con un ejercicio.
+**No es necesario para seguir el taller.**
+
+| Checkpoint | Concepto que enseña |
+|---|---|
+| [`00-hola-claude`](checkpoints/00-hola-claude/) | La llamada básica: `messages.create`, roles y bloques de contenido |
+| [`01-primera-tool`](checkpoints/01-primera-tool/) | Tools y JSON Schema: Claude **solicita**, no ejecuta (`stop_reason == "tool_use"`) |
+| [`02-loop-agentico`](checkpoints/02-loop-agentico/) | El loop agéntico: ejecutar → `tool_result` → repetir, con límite de iteraciones |
+| [`03-agente-completo`](checkpoints/03-agente-completo/) | System prompt + 3 herramientas: orquestación que **emerge**, nadie la programa |
 
 ## Equivalencias multi-cloud
 

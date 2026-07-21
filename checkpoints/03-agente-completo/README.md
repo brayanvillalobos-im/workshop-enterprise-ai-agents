@@ -1,5 +1,8 @@
 # Checkpoint 03 — Agente completo
 
+> 📚 Material opcional para quienes programan — no es necesario para seguir
+> el taller (la ruta principal está en [GUIA-EXPRESS.md](../../GUIA-EXPRESS.md)).
+
 ## Objetivo
 Armar el "Asistente de Operaciones" completo en una CLI: 3 herramientas,
 system prompt y el mismo loop del checkpoint 02.

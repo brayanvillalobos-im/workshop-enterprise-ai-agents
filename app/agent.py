@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import json
 import os
+from pathlib import Path
 
 import anthropic
 
@@ -24,19 +25,26 @@ from .tools import TOOLS, ejecutar_herramienta
 MODEL = os.getenv("MODEL", "claude-sonnet-4-6")
 MAX_ITERACIONES = 10
 
-SYSTEM_PROMPT = """\
-Eres el "Asistente de Operaciones" de una consultora tecnológica chilena.
-Ayudas al equipo interno con tres cosas: consultar el inventario de productos
-y servicios, preparar cotizaciones y responder preguntas sobre políticas
-internas.
+# El system prompt vive en un archivo de texto editable: es el ejercicio de
+# personalización del taller (cambiar la personalidad sin tocar código).
+SYSTEM_PROMPT_FILE = Path(__file__).parent / "config" / "system_prompt.txt"
 
-Reglas:
-- Usa las herramientas disponibles en vez de inventar datos. Si una búsqueda
-  no arroja resultados, dilo honestamente.
-- Para cotizar, consulta primero el inventario y usa los precios reales.
-- Los montos están en pesos chilenos (CLP); formatéalos con separador de miles.
-- Responde en español, de forma breve y profesional.
-"""
+# Respaldo por si el archivo se borra o queda vacío durante el taller.
+SYSTEM_PROMPT_DEFAULT = (
+    'Eres el "Asistente de Operaciones" de una consultora tecnológica. '
+    "Usa las herramientas disponibles en vez de inventar datos y responde "
+    "en español, breve y profesional."
+)
+
+
+def cargar_system_prompt() -> str:
+    """Lee el system prompt en CADA consulta, a propósito: así los cambios en
+    el .txt se sienten al instante en el chat, sin reiniciar el servidor."""
+    try:
+        texto = SYSTEM_PROMPT_FILE.read_text(encoding="utf-8").strip()
+    except OSError:
+        return SYSTEM_PROMPT_DEFAULT
+    return texto or SYSTEM_PROMPT_DEFAULT
 
 
 def ejecutar_agente(
@@ -55,7 +63,7 @@ def ejecutar_agente(
         response = client.messages.create(
             model=MODEL,
             max_tokens=2048,
-            system=SYSTEM_PROMPT,
+            system=cargar_system_prompt(),
             tools=TOOLS,
             messages=conversacion,
         )

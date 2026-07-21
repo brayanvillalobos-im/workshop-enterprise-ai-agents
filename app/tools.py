@@ -94,7 +94,18 @@ TOOLS: list[dict] = [
 
 
 def consultar_inventario(producto: str) -> str:
-    inventario = json.loads((DATA_DIR / "inventario.json").read_text(encoding="utf-8"))
+    # Los participantes editan inventario.json a mano durante el taller: si el
+    # formato se rompe, devolvemos una pista clara en vez de un traceback.
+    try:
+        inventario = json.loads((DATA_DIR / "inventario.json").read_text(encoding="utf-8"))
+    except FileNotFoundError:
+        return "No encuentro el archivo app/data/inventario.json. ¿Se movió o se borró?"
+    except json.JSONDecodeError as exc:
+        return (
+            f"El archivo inventario.json tiene un error de formato cerca de la "
+            f"línea {exc.lineno}. Revisa que no falte (o sobre) una coma, una "
+            f"comilla o una llave en esa zona."
+        )
     consulta = producto.lower().strip()
     resultados = [
         item
@@ -143,7 +154,10 @@ def calcular_cotizacion(items: list[dict], descuento_pct: float) -> str:
 
 
 def buscar_conocimiento(pregunta: str) -> str:
-    texto = (DATA_DIR / "conocimiento.md").read_text(encoding="utf-8")
+    try:
+        texto = (DATA_DIR / "conocimiento.md").read_text(encoding="utf-8")
+    except FileNotFoundError:
+        return "No encuentro el archivo app/data/conocimiento.md. ¿Se movió o se borró?"
     # Cada política vive bajo un encabezado "## ...": partimos por sección y
     # puntuamos por coincidencia de palabras clave. Es búsqueda simple a
     # propósito — en producción esto sería un índice o embeddings (RAG).

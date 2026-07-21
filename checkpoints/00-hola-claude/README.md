@@ -1,5 +1,8 @@
 # Checkpoint 00 — Hola Claude
 
+> 📚 Material opcional para quienes programan — no es necesario para seguir
+> el taller (la ruta principal está en [GUIA-EXPRESS.md](../../GUIA-EXPRESS.md)).
+
 ## Objetivo
 Hacer tu primera llamada al API de Anthropic y verificar que el entorno quedó
 bien configurado.

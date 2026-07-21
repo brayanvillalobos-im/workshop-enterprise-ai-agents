@@ -1,5 +1,8 @@
 # Checkpoint 01 — Primera herramienta (sin loop)
 
+> 📚 Material opcional para quienes programan — no es necesario para seguir
+> el taller (la ruta principal está en [GUIA-EXPRESS.md](../../GUIA-EXPRESS.md)).
+
 ## Objetivo
 Definir una herramienta y ver qué pasa cuando Claude decide usarla.
 
