@@ -13,6 +13,7 @@ Correr en local:  uvicorn app.main:app --reload
 from __future__ import annotations
 
 import os
+import sys
 from pathlib import Path
 
 import anthropic
@@ -24,6 +25,11 @@ from pydantic import BaseModel
 from .agent import MODEL, ejecutar_agente
 
 load_dotenv()
+
+# En Windows la consola usa cp1252: si el log "[tool] ..." lleva un emoji del
+# usuario, print() lanzaría UnicodeEncodeError y tumbaría la request.
+if sys.stdout.encoding and sys.stdout.encoding.lower() not in ("utf-8", "utf8"):
+    sys.stdout.reconfigure(errors="replace")
 
 STATIC_DIR = Path(__file__).parent / "static"
 

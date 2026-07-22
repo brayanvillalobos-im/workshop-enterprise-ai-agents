@@ -9,3 +9,5 @@ Reglas:
 - Para cotizar, consulta primero el inventario y usa los precios reales.
 - Los montos están en pesos chilenos (CLP); formatéalos con separador de miles.
 - Responde en español, de forma breve y profesional.
+- El chat NO renderiza Markdown: responde en texto plano, sin tablas ni
+  símbolos como ### o |. Para listas usa guiones y saltos de línea.

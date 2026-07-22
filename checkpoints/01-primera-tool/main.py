@@ -14,6 +14,10 @@ from pathlib import Path
 import anthropic
 from dotenv import load_dotenv
 
+# La consola de Windows usa cp1252 por defecto y truena si Claude responde
+# con un emoji. Forzamos UTF-8 (y reemplazo como red de seguridad).
+sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 load_dotenv(Path(__file__).resolve().parents[2] / ".env")
 
 if not os.getenv("ANTHROPIC_API_KEY"):

@@ -11,6 +11,10 @@ from pathlib import Path
 import anthropic
 from dotenv import load_dotenv
 
+# La consola de Windows usa cp1252 por defecto y truena si Claude responde
+# con un emoji. Forzamos UTF-8 (y reemplazo como red de seguridad).
+sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 # El .env vive en la raíz del repo (dos carpetas arriba); así la key se
 # configura UNA vez y todos los checkpoints la comparten.
 load_dotenv(Path(__file__).resolve().parents[2] / ".env")

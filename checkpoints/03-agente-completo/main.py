@@ -16,6 +16,10 @@ from pathlib import Path
 import anthropic
 from dotenv import load_dotenv
 
+# La consola de Windows usa cp1252 por defecto y truena si Claude responde
+# con un emoji. Forzamos UTF-8 (y reemplazo como red de seguridad).
+sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DATA_DIR = REPO_ROOT / "app" / "data"  # reutilizamos los datos de la app final
 
