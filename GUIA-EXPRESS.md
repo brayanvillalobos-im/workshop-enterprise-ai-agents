@@ -138,8 +138,15 @@ Cada política es una sección que empieza con `## Título`. Agrega una tuya
 ## Sesión 2 — Tu agente en internet (75 min)
 
 Hoy el agente sale de tu computador y queda en una URL pública usando
-**Google Cloud Run**. La ruta completa comando a comando está en
-[`deploy/01-cloud-run.md`](deploy/01-cloud-run.md) — esta es la vista de pájaro:
+**Google Cloud Run**. Hay dos caminos:
+
+- 🤖 **Con Claude Code** (el que hacemos en vivo): un solo prompt y Claude
+  ejecuta todos los comandos de `gcloud` por ti, explicando cada paso. El
+  prompt está en [`deploy/00-deploy-con-claude.md`](deploy/00-deploy-con-claude.md).
+- ✋ **A mano**, comando por comando: [`deploy/01-cloud-run.md`](deploy/01-cloud-run.md).
+
+Esta es la vista de pájaro del camino manual (útil para entender qué hace
+Claude cuando lo automatiza):
 
 **1. Inicia sesión en Google Cloud:** `gcloud auth login`
 ✅ Esperado: se abre el navegador y al volver dice `You are now logged in`.

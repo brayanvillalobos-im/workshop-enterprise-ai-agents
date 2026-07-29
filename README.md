@@ -117,7 +117,8 @@ Si rompes el formato del JSON, el agente te lo dirá amablemente en el chat
 
 | Guía | Nube | Nivel de detalle |
 |---|---|---|
-| [`deploy/01-cloud-run.md`](deploy/01-cloud-run.md) | Google Cloud Run | ⭐ Guía principal del taller, comando a comando |
+| [`deploy/00-deploy-con-claude.md`](deploy/00-deploy-con-claude.md) | Google Cloud Run | 🤖 **Demo en vivo**: el prompt para que Claude Code despliegue todo con la CLI de gcloud |
+| [`deploy/01-cloud-run.md`](deploy/01-cloud-run.md) | Google Cloud Run | ⭐ Guía manual, comando a comando (respaldo y referencia) |
 | [`deploy/02-aws-app-runner.md`](deploy/02-aws-app-runner.md) | AWS App Runner | Resumida pero completa |
 | [`deploy/03-azure-container-apps.md`](deploy/03-azure-container-apps.md) | Azure Container Apps | Resumida pero completa |
 | [`deploy/multi-cloud.md`](deploy/multi-cloud.md) | Bedrock / Vertex AI | El mismo agente con modelos gestionados en la nube del cliente |
