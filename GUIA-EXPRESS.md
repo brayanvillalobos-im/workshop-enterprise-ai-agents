@@ -145,6 +145,11 @@ Hoy el agente sale de tu computador y queda en una URL pública usando
   prompt está en [`deploy/00-deploy-con-claude.md`](deploy/00-deploy-con-claude.md).
 - ✋ **A mano**, comando por comando: [`deploy/01-cloud-run.md`](deploy/01-cloud-run.md).
 
+> 💳 **¿Te preocupa poner una tarjeta?** Es la duda más común y tiene
+> respuesta: [`deploy/cuenta-sin-tarjeta.md`](deploy/cuenta-sin-tarjeta.md).
+> En el taller usamos la facturación corporativa (nadie expone su tarjeta), y
+> ahí está también la alternativa gratuita sin ningún medio de pago.
+
 Esta es la vista de pájaro del camino manual (útil para entender qué hace
 Claude cuando lo automatiza):
 

@@ -122,6 +122,7 @@ Si rompes el formato del JSON, el agente te lo dirá amablemente en el chat
 | [`deploy/02-aws-app-runner.md`](deploy/02-aws-app-runner.md) | AWS App Runner | Resumida pero completa |
 | [`deploy/03-azure-container-apps.md`](deploy/03-azure-container-apps.md) | Azure Container Apps | Resumida pero completa |
 | [`deploy/multi-cloud.md`](deploy/multi-cloud.md) | Bedrock / Vertex AI | El mismo agente con modelos gestionados en la nube del cliente |
+| [`deploy/cuenta-sin-tarjeta.md`](deploy/cuenta-sin-tarjeta.md) | GCP / Hugging Face | 💳 **¿Sin tarjeta?** Facturación corporativa, prueba gratis y una alternativa sin medio de pago |
 
 ## Material opcional — checkpoints para quienes programan
 

@@ -25,9 +25,11 @@ gcloud auth login
 ```bash
 gcloud billing accounts list
 ```
-✅ Debe listar al menos una cuenta `ACTIVE`. Si sale vacío, **pídele a TI /
+✅ Debe listar al menos una cuenta `OPEN: True`. Si sale vacío, **pídele a TI /
 Finanzas una cuenta de facturación** antes del taller: sin ella Cloud Run no
-despliega. Es el bloqueador más común.
+despliega. Es el bloqueador más común — el correo listo para copiar y las
+alternativas sin tarjeta están en
+[`cuenta-sin-tarjeta.md`](cuenta-sin-tarjeta.md).
 
 ```bash
 gcloud config list

@@ -6,11 +6,18 @@ dejar costos corriendo.
 
 > 💰 Cloud Run tiene capa gratuita y cobra solo por uso. Revisa los precios
 > vigentes en la página oficial: <https://cloud.google.com/run/pricing>
+>
+> ⚠️ Ojo con la región: la **capa gratuita aplica solo en las regiones de
+> EE.UU.** (`us-central1`, `us-east1`, `us-west1`), no en `southamerica-west1`.
+> Si quieres costo cero, despliega en `us-central1` a cambio de algo más de
+> latencia.
 
 ## Prerrequisitos
 
 1. Una cuenta de Google Cloud con facturación habilitada
-   (<https://console.cloud.google.com>).
+   (<https://console.cloud.google.com>). **¿No quieres poner tu tarjeta?**
+   Lee [`cuenta-sin-tarjeta.md`](cuenta-sin-tarjeta.md): tiene la ruta con
+   facturación corporativa y una alternativa sin tarjeta ni facturación.
 2. El SDK `gcloud` instalado: <https://cloud.google.com/sdk/docs/install>
 3. Tu API key de Anthropic a mano.
 
@@ -68,8 +75,8 @@ Desde la **raíz del repo** (donde está el `Dockerfile`):
 
 ```bash
 # --source .          → Cloud Build construye la imagen desde el Dockerfile
-# --region            → southamerica-west1 es Santiago de Chile (baja latencia);
-#                       us-central1 es una alternativa más barata
+# --region            → southamerica-west1 es Santiago de Chile (baja latencia,
+#                       pero SIN capa gratuita); usa us-central1 para costo cero
 # --allow-unauthenticated → la URL queda pública (es una demo)
 # --set-secrets       → inyecta el secreto como variable ANTHROPIC_API_KEY
 # --set-env-vars      → configura el modelo sin tocar código
